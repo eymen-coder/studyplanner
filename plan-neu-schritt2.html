@@ -5,6 +5,7 @@
     <title>Plan erstellen - Schritt 2</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/forms.css">
 </head>
 
 <body>
@@ -30,31 +31,35 @@
             <fieldset>
                 <legend class="bigger">Daten eingeben</legend>
                 <p>
-                    <label class="bigger">
+                    <label class="bigger required">
                         Name:
-                        <input type="text" name="name" required maxlength="150" pattern="^[A-Za-z0-9-]+$"
-                            placeholder="z.B. Wi-Plan">
-                    </label>
-                    <label class="bigger">
-                        Semester:
-                        <select name="semester">
-                            <option value="Sommersemester">Sommersemester</option>
-                            <option value="Wintersemester">Wintersemester</option>
-                        </select>
-                    </label>
-                    <label class="bigger">
-                        Jahr:
-                        <input type="number" name="jahr" required min="1900" max="2025" value="2025">
+                        <input class="eingabe" type="text" name="name" required maxlength="150"
+                            pattern="^[A-Za-z0-9-]+$" placeholder="z.B. Wi-Plan">
+                        
                     </label>
                 </p>
-                <fieldset>
-                    <legend class="bigger" >Kurse wählen</legend>
-                    <p>
-                        <label><input type="checkbox" name="kurse" value="pk">Programmierkurs</label>
-                        <label><input type="checkbox" name="kurse" value="wt">Web-Technologien</label>
-                        <label><input type="checkbox" name="kurse" value="db">Datenbaken</label>
-                    </p>    
-                </fieldset>
+            </fieldset>
+            <fieldset>
+                <legend class="bigger">Semester wählen</legend>
+                <label class="bigger">
+                    Semester:
+                    <select name="semester">
+                        <option value="Sommersemester">Sommersemester</option>
+                        <option value="Wintersemester">Wintersemester</option>
+                    </select>
+                </label>
+                <label class="bigger required">
+                    Jahr:
+                    <input class="eingabe" type="number" name="jahr" required min="1900" max="2025" value="2025" required>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend class="bigger">Kurse wählen</legend>
+                <p>
+                    <label><input type="checkbox" name="kurse" value="pk">Programmierkurs</label>
+                    <label><input type="checkbox" name="kurse" value="wt">Web-Technologien</label>
+                    <label><input type="checkbox" name="kurse" value="db">Datenbaken</label>
+                </p>
             </fieldset>
             <input type="submit" value="Weiter">
         </form>
