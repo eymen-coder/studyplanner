@@ -1,0 +1,23 @@
+h1{
+    color:aqua;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+h2{
+    color:rgb(0, 47, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav, aside{
+    background-color: lightgray;
+    color: black;
+}
+
+nav > a{
+    text-decoration: none;
+}
+
+.bigger{
+    font-weight: bold;
+}
