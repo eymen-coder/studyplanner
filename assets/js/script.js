@@ -108,7 +108,7 @@ studiengang.addKurs(kurs2);
 studiengang.addKurs(kurs3);
 
 // Semesterplan
-const semesterplan = new Semesterplan("Mein Plan", "SS 22");
+const semesterplan = new Semesterplan("Mein Plan", "WiSe 25");
 semesterplan.addKurse([kurs1, kurs2, kurs3]);
 
 // Sortieren nach modulId
@@ -121,3 +121,24 @@ studiengang.kurse.forEach(k => console.log(`    ${k.modulId}: ${k.name}`));
 
 console.log(`${semesterplan.name} (${semesterplan.semester}):`);
 semesterplan.kurse.forEach(k => console.log(`    ${k.modulId}: ${k.name}`));
+
+/* Praktika 9 */ 
+// Zusätzliche Beispielkurse
+const kurs4 = new Kurs("11111", "Webtechnologien", "SV", termin1, lehrperson1);
+const kurs5 = new Kurs("22222", "Machine Learning", "S", termin2, lehrperson1);
+const kurs6 = new Kurs("33333", "Rechnernetze", "T", termin3, lehrperson1);
+
+// Zusätzliche Semesterpläne
+const semesterplan2 = new Semesterplan("Mein Plan 2", "Sose 26");
+semesterplan2.studiengang = "INPBPI";
+semesterplan2.addKurse([kurs4]);
+
+const semesterplan3 = new Semesterplan("Mein Plan 3", "WiSe 27");
+semesterplan3.studiengang = "INPBPI";
+semesterplan3.addKurse([kurs5, kurs6]);
+
+// Studiengang hinzufügen für den ersten Plan (falls noch nicht gesetzt)
+semesterplan.studiengang = "WIPB";
+
+// Alle Pläne zusammenfassen
+const plaene = [semesterplan, semesterplan2, semesterplan3];

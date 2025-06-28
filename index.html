@@ -30,19 +30,14 @@
 
         <main>
             <section>
-                <h2>WiSe 25</h2>
-                <ul>
-                    <li><a href="plan.html">WI-Plan</a> (4 Kurse, 7 Stunden)</li>
-                    <lI><a href="plan.html">MI-Plan</a> (5 Kurse, 9 Stunden)</lI>
-                </ul>
+                <label for="ansicht">Gruppierung nach:</label>
+                <select id="ansicht">
+                    <option value="semester">Semester</option>
+                    <option value="studiengang">Studiengang</option>
+                </select>
             </section>
 
-            <section>
-                <h2>SoSe 26</h2>
-                <ul>
-                    <li><a href="plan.html">Pi-Plan</a>(3 Kurse, 6 Stunden)</li>
-                </ul>
-            </section>
+            <section id="plaene-container"></section>
         </main>
         <aside>
             <h2>Akutelle Meldungen</h2>
@@ -57,6 +52,7 @@
         <p>&copy; By Eymen</p>
     </footer>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/index.js"></script>
 
 </body>
 
