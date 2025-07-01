@@ -1,16 +1,17 @@
 const fetcher = require("../models/scheduleFetcher");
 
-// Weitere benoetigte Module einbinden
+// Weitere benötigte Module einbinden
 const Studiengang = require("./studiengang");
 const Kurs = require("./kurs");
 const Lehrperson = require("./lehrperson");
 const Termin = require("./termin");
 
 const lehrangebot = [];
+const semesterplaene = []; // NEU: Array für Semesterpläne
 
 /**
- * Initialisiert die Daten der Anwendung, also die verfuegbaren Studiengaenge mit den
- * zugehoerigen Kursen. Die Daten werden asynchron über das scheduleFetcher-Modul
+ * Initialisiert die Daten der Anwendung, also die verfügbaren Studiengänge mit den
+ * zugehörigen Kursen. Die Daten werden asynchron über das scheduleFetcher-Modul
  * abgerufen (Promise-API mit "then"). Danach werden die erhaltenen Daten
  * in Fachobjekte konvertiert und ins Lehrangebot übernommen.
  */
@@ -28,11 +29,7 @@ const initialisiereLehrangebot = () => {
           kurs.termId,
           kurs.studentSet,
           new Lehrperson(kurs.lecturerId, kurs.lecturerSurname),
-          new Termin(
-            kurs.weekday,
-            kurs.timeSlotBegin,
-            kurs.roomId
-          )
+          new Termin(kurs.weekday, kurs.timeSlotBegin, kurs.roomId)
         );
 
         studiengang.addKurs(kursObjekt);
@@ -45,7 +42,7 @@ const initialisiereLehrangebot = () => {
   });
 };
 
-// Weitere Funktionen aus der Aufgabenstellung
+// Studiengänge & Kurse
 
 function ermittleStudiengangZuId(id) {
   return lehrangebot.find((stg) => stg.id === id);
@@ -61,11 +58,55 @@ function holeAlleStudiengaenge() {
   return lehrangebot;
 }
 
-// Schnittstelle des Moduls
+// Hilfsfunktion: Gruppierung
+
+function gruppiereNach(array, eigenschaft) {
+  return array.reduce((acc, obj) => {
+    const key = obj[eigenschaft];
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(obj);
+    return acc;
+  }, {});
+}
+
+// NEU: Semesterpläne
+
+function erstelleSemesterplan(name, semester, jahr, studiengangId, kurse) {
+  const id = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+  const neuerPlan = {
+    id,
+    name,
+    semester,
+    jahr,
+    studiengang: studiengangId,
+    kurse
+  };
+  semesterplaene.push(neuerPlan);
+  return neuerPlan;
+}
+
+function ermittleSemesterplanZuId(id) {
+  return semesterplaene.find(p => p.id === id);
+}
+
+function holePlaeneGruppiertNachSemester() {
+  return gruppiereNach(semesterplaene, "semester");
+}
+
+function holePlaeneGruppiertNachStudiengang() {
+  return gruppiereNach(semesterplaene, "studiengang");
+}
+
+// Export aller Funktionen
+
 module.exports = {
   initialisiereLehrangebot,
   ermittleStudiengangZuId,
   ermittleKursZuStudiengangUndId,
   holeAlleStudiengaenge,
-  lehrangebot
+  lehrangebot,
+  erstelleSemesterplan,
+  ermittleSemesterplanZuId,
+  holePlaeneGruppiertNachSemester,
+  holePlaeneGruppiertNachStudiengang
 };

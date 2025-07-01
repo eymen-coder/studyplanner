@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="content-wrapper">
+      <main>
+        <form action="/waehleStudiengang" method="post">
+          <fieldset>
+            <legend class="bigger">Daten eingeben</legend>
+            <label>
+              <span class="bigger">Ein Studiengang wählen</span>
+              <select name="studiengang" required>
+                <% for (let stg of studiengaenge) { %>
+                  <option value="<%= stg.id %>"><%= stg.name %></option>
+                <% } %>
+              </select>
+            </label>
+          </fieldset>
+          <input type="submit" value="Weiter">
+        </form>
+      </main>
+
+      <%- include('partials/aside') %>
+    </div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

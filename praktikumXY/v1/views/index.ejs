@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="content-wrapper">
+      <main>
+        <section>
+          <label for="ansicht">Gruppierung nach:</label>
+          <form action="/index" method="get">
+            <select name="gruppierung" id="ansicht">
+              <option value="Semester" <%= gruppierung === 'Semester' ? 'selected' : '' %>>Semester</option>
+              <option value="Studiengang" <%= gruppierung === 'Studiengang' ? 'selected' : '' %>>Studiengang</option>
+            </select>
+            <button type="submit">Anzeigen</button>
+          </form>
+        </section>
+
+        <% for (let gruppe in plaene) { %>
+          <section>
+            <h2><%= gruppe %></h2>
+            <ul>
+              <% for (let plan of plaene[gruppe]) { %>
+                <li>
+                  <a href="/plan?id=<%= plan.id %>"><%= plan.name %></a>
+                  (<%= plan.kurse.length %> Kurse, <%= plan.kurse.length * 2 %> Stunden)
+                </li>
+              <% } %>
+            </ul>
+          </section>
+        <% } %>
+      </main>
+
+      <%- include('partials/aside') %>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <!-- 👇 Füge das direkt vor </body> ein -->
+    <script>
+      document.getElementById("ansicht").addEventListener("change", function () {
+        this.form.submit(); // automatisch absenden bei Änderung
+      });
+    </script>
+  </body>
+</html>

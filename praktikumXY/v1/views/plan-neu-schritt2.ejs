@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="content-wrapper">
+      <main>
+        <form action="/neu" method="post">
+          <input type="hidden" name="studiengang" value="<%= studiengang.id %>">
+
+          <fieldset>
+            <legend class="bigger">Daten eingeben</legend>
+            <label class="bigger required">Name:
+              <input class="eingabe" type="text" name="name" required maxlength="150"
+                pattern="^[A-Za-z0-9-]+$" placeholder="z.B. Wi-Plan">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend class="bigger">Semester wählen</legend>
+            <label>Semester:
+              <select name="semester">
+                <option value="SoSe">Sommersemester</option>
+                <option value="WiSe">Wintersemester</option>
+              </select>
+            </label>
+            <label class="required">Jahr:
+              <input class="eingabe" type="number" name="jahr" required min="1900" max="2100" value="2025">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend class="bigger">Kurse wählen</legend>
+            <% for (let kurs of studiengang.kurse) { %>
+              <label>
+                <input type="checkbox" name="kurse" value="<%= kurs.id %>">
+                <%= kurs.name %> – <%= kurs.typ %>
+              </label><br>
+            <% } %>
+          </fieldset>
+
+          <input type="submit" value="Semesterplan erstellen">
+        </form>
+      </main>
+
+      <% include partials/aside %>
+    </div>
+
+    <% include partials/footer %>
+  </body>
+</html>

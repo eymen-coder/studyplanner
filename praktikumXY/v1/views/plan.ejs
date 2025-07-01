@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+  <%- include('partials/head') %>
+  <body>
+    <%- include('partials/header') %>
+
+    <div class="content-wrapper">
+      <main>
+        <section>
+          <h2>Informationen zum Semesterplan</h2>
+          <p><span class="bigger">Name:</span> <%= plan.name %></p>
+          <p><span class="bigger">Studiengang:</span> <%= studiengang.name %></p>
+          <p><span class="bigger">Semester:</span> <%= plan.semester %> <%= plan.jahr %></p>
+        </section>
+
+        <section>
+          <h2>Gewählte Kurse</h2>
+          <table class="tabelle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Wochentag</th>
+                <th>Beginn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let kurs of plan.kurse) { %>
+                <tr>
+                  <td><a href="/kurs?sid=<%= plan.studiengang %>&kid=<%= kurs.id %>"><%= kurs.name %></a></td>
+                  <td><%= kurs.termin.wochentag %></td>
+                  <td><%= kurs.termin.beginn %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </section>
+      </main>
+
+      <% include partials/aside %>
+    </div>
+
+    <% include partials/footer %>
+  </body>
+</html>
